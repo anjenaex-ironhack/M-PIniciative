@@ -17,11 +17,11 @@ class Turno {
     static _estres = 0;
 
     participantes = [
-        new Participante('El gran Samir ', 8, 1),
-        new Participante('Santiago Bahamonte ', 9, 2),
-        new Participante('Ignacio ', 7, 1),
-        new Participante('Gonzalo ', 8, 1),
-        new Participante('El judio ', 8, 1),
+        // new Participante('El gran Samir ', 8, 1),
+        // new Participante('Santiago Bahamonte ', 9, 2),
+        // new Participante('Ignacio ', 7, 1),
+        // new Participante('Gonzalo ', 8, 1),
+        // new Participante('El judio ', 8, 1),
         // new Participante('enemigo 2 ', 7, 1),
         // new Participante('enemigo 3 ', 7, 1),
         // new Participante('enemigo 4 ', 7, 1),
