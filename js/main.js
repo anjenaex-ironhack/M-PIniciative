@@ -1,16 +1,10 @@
 class Participante {
-
     constructor(nombre, hab, agi) {
-
         this.nombre = nombre;
         this.hab = hab;
         this.agi = agi;
-
     }
-
-
 }
-
 
 class Turno {
 
@@ -31,39 +25,32 @@ class Turno {
     numeroDeAcciones = [];
     iniciativa = [];
 
-
     constructor() {
-
-
-
         this.obtenerParticipaciones();
         this.getIniciativa();
-
-
     }
 
     obtenerParticipaciones() {
-
         for (let i = 0; i < this.participantes.length; i++) {
-
-            if (this.participantes[i].hab <= 6) {
-                this.numeroDeAcciones.push(this.participantes[i].nombre);
-            } else if (this.participantes[i].hab == 7 || this.participantes[i].hab == 8) {
-                this.numeroDeAcciones.push(this.participantes[i].nombre);
-                this.numeroDeAcciones.push(this.participantes[i].nombre);
-            } else if (this.participantes[i].hab == 9 || this.participantes[i].hab == 10) {
-                this.numeroDeAcciones.push(this.participantes[i].nombre);
-                this.numeroDeAcciones.push(this.participantes[i].nombre);
-                this.numeroDeAcciones.push(this.participantes[i].nombre);
-            } else {
-                console.log('hubo un error')
+            let participante = this.participantes[i];
+            let accionesPorParticipante = this.getNumeroDeParticipacionesPorParticipante(participante);
+            for (let i = 0; i < accionesPorParticipante; i++) {
+                this.numeroDeAcciones.push(participante.nombre);
             }
-        };
+        }
+    }
 
+    getNumeroDeParticipacionesPorParticipante(participante) {
+        let numeroDeParticipacionesPorParticipante = 1;
+        let habilidadInicial =5;
+        while(participante.hab >= habilidadInicial + 2 ) {
+            numeroDeParticipacionesPorParticipante++;
+            habilidadInicial = habilidadInicial + 2;
+        }
+        return numeroDeParticipacionesPorParticipante;
     }
 
     getIniciativa() {
-
         function barajar(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
@@ -79,8 +66,6 @@ class Turno {
                 this.numeroDeAcciones[i + 1] = memoria;
             };
         }
-
-
     }
 
     deleteCharacter(participante) {
@@ -91,7 +76,6 @@ class Turno {
     }
 
     render() {
-
         let playerList = document.querySelector('#playerList');
         playerList.innerHTML = "";
 
@@ -129,13 +113,10 @@ $(document).ready(function () {
         playerList.insertAdjacentHTML('beforeend', `<li><span>${name}</span>
                                                         <span>${hability}</span>
                                                         <span>${agility}</span>
-                                                        <button class="delete">X</button></li>`);
-        
-        
+                                                        <button class="delete">X</button></li>`);        
     });
 
     playerList.addEventListener("click", event => {
-
             deleteCharacterList = document.querySelectorAll(".delete");
             for (let i = 0; i < deleteCharacterList.length; i++) {
                 if(event.target.closest("li") == deleteCharacterList[i].closest("li")){
@@ -144,19 +125,15 @@ $(document).ready(function () {
                 // console.log(deleteCharacterList[i].closest("li"))
                 // turno.deleteCharacter(i);
             }
-            $(event.target).parent('li').remove();
-        
+            $(event.target).parent('li').remove();      
     })
 
     $('#aumentarEstres').click(function () {
-
         contadorTurnos++;
         document.querySelector("#display").innerHTML = contadorTurnos;
-
     });
 
     $('#botonIniciativa').click(function () {
-
         contadorTurnos++;
         document.querySelector("#display").innerHTML = contadorTurnos;
         //turno = new Turno();
@@ -167,7 +144,5 @@ $(document).ready(function () {
         turno.numeroDeAcciones.forEach(player => {
             iniciativa.insertAdjacentHTML('beforeend', `<li>${player}</li>`);
         })
-
     });
-
 });
